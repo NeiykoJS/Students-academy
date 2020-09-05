@@ -9,7 +9,7 @@ module.exports = {
     description: "Joue une musique",
     run: async (client, message, args) => {
 
-        const { voiceChannel } = message.member.voice.channel;
+        const { voiceChannel } = message.member;
         if(!voiceChannel) return message.channel.send("❌ Erreur : Vous devez être dans un salon vocal pour utilisez cette commande !");
 
         const serverQueue = message.client.queue.get(message.guild.id);
