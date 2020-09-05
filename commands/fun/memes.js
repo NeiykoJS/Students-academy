@@ -10,15 +10,16 @@ module.exports = {
 
         if (message.deletable) message.delete();
 
-        const subReddits = ["dankmeme", "meme", "me_irl"];
+        const subReddits = ["dankmeme","dankmemes", "meme"];
         const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
         const img = await randomPuppy(random);
         const embed = new RichEmbed()
             .setColor("RANDOM")
             .setImage(img)
-            .setTitle(`From /r/${random}`)
-            .setURL(`https://reddit.com/r/${random}`);
+            .setTitle(`Source: Reddit`)
+            .setURL(`https://reddit.com/r/${random}`)
+            .setTimestamp();
 
         message.channel.send(embed);
     }
