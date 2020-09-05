@@ -10,7 +10,7 @@ module.exports = {
 
         if (message.deletable) message.delete();
 
-        const subReddits = ["dankmeme","dankmemes", "meme"];
+        const subReddits = ["dankmeme","dankmemes", "meme", "FrenchMemes"];
         const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
         const img = await randomPuppy(random);
