@@ -6,6 +6,8 @@ const client = new Client({
     disableEveryone : true
 });
 
+this.queue = new Map();
+
 client.commands = new Collection();
 client.aliases = new Collection();
 
