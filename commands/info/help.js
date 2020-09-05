@@ -8,15 +8,11 @@ module.exports = {
     description: "Gives the description of all commands",
     usage: "[command | alias]",
     run: async (client, message, args) => {
-        // If there's an args found
-        // Send the info of that command found
-        // If no info found, return not found embed.
+
         if (message.deletable) message.delete();
         if (args[0]) {
             return getCMD(client, message, args[0]);
         } else {
-            // Otherwise send all the commands available
-            // Without the cmd info
             return getAll(client, message);
         }
     }
@@ -26,8 +22,7 @@ function getAll(client, message) {
     const embed = new RichEmbed()
         .setColor("ORANGE")
         
-    // Map all the commands
-    // with the specific category
+    // Map de toutes les commandes
     const commands = (category) => {
         return client.commands
             .filter(cmd => cmd.category === category)
@@ -35,7 +30,7 @@ function getAll(client, message) {
             .join("\n");
     }
 
-    // Map all the categories
+    // Map des catégories
     const info = client.categories
         .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
         .reduce((string, category) => string + "\n" + category);
@@ -46,18 +41,17 @@ function getAll(client, message) {
 function getCMD(client, message, input) {
     const embed = new RichEmbed()
 
-    // Get the cmd by the name or alias
+    // Get cmd avec le nom ou l'alias
     const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
     
     let info = `No command information found for **${input.toLowerCase()}**`;
 
-    // If no cmd is found, send not found embed
     if (!cmd) {
         return message.channel.send(embed.setColor("RED").setDescription(info));
     }
 
-    // Add all cmd info to the embed
-    if (cmd.name) info = `**Name of the command** : ${cmd.name}`;
+    // Ajout de toutes les cmd sur l'embed
+    if (cmd.name) info = `**Nom de la commande** : ${cmd.name}`;
     if (cmd.aliases) info += `\n**Aliases** : ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
     if (cmd.description) info += `\n**Description** : ${cmd.description}`;
 
