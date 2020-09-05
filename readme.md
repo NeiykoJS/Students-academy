@@ -1,1 +1,1 @@
-Discord Bot
+Discord Bot pour le serveur Student's Academy
